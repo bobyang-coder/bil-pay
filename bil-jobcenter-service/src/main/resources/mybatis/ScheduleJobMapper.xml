@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bob.jobcenter.dao.ScheduleJobMapper">
+    <resultMap id="BaseResultMap" type="com.bob.jobcenter.model.ScheduleJob">
+        <result column="ID_" property="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="NAME_" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="GROUP_" property="group" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="STATUS_" property="status" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+        <result column="CRON_" property="cron" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="DESCRIPTION_" property="description" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="IS_CONCURRENT_" property="isConcurrent" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+        <result column="BEAN_CLASS_" property="beanClass" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="BEAN_NAME_" property="beanName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="METHOD_NAME_" property="methodName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="CREATE_TIME_" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="UPDATE_TIME_" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="CREATE_USER_" property="createUser" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="MODIFY_USER_" property="modifyUser" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="VERSION_" jdbcType="BIGINT" javaType="java.lang.Long"/>
+    </resultMap>
+    <sql id="ScheduleJobColumns">
+        ID_, NAME_, GROUP_, STATUS_, CRON_, DESCRIPTION_, IS_CONCURRENT_, BEAN_CLASS_, BEAN_NAME_,
+        METHOD_NAME_, CREATE_TIME_, UPDATE_TIME_, CREATE_USER_, MODIFY_USER_, VERSION_
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="ScheduleJobColumns"/>
+        FROM SCHEDULE_JOB
+        WHERE ID_ = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Long">
+      DELETE FROM SCHEDULE_JOB
+      WHERE ID_ = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.bob.jobcenter.model.ScheduleJob">
+      insert into SCHEDULE_JOB (
+        ID_,
+        NAME_,
+        GROUP_,
+        STATUS_,
+        CRON_,
+        DESCRIPTION_,
+        IS_CONCURRENT_,
+        BEAN_CLASS_,
+        BEAN_NAME_,
+        METHOD_NAME_,
+        CREATE_TIME_,
+        UPDATE_TIME_,
+        CREATE_USER_,
+        MODIFY_USER_,
+        VERSION_
+      )
+      values (
+        #{id,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR},
+        #{group,jdbcType=VARCHAR},
+        #{status,jdbcType=TINYINT},
+        #{cron,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR},
+        #{isConcurrent,jdbcType=TINYINT},
+        #{beanClass,jdbcType=VARCHAR},
+        #{beanName,jdbcType=VARCHAR},
+        #{methodName,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP},
+        #{createUser,jdbcType=VARCHAR},
+        #{modifyUser,jdbcType=VARCHAR},
+        #{version,jdbcType=BIGINT}
+      )
+  </insert>
+
+    <!--<update id="updateByPrimaryKeySelective" parameterType="com.bob.jobcenter.model.ScheduleJob">-->
+    <!--update SCHEDULE_JOB-->
+    <!--<set>-->
+    <!--<if test="name != null">-->
+    <!--NAME_ = #{name,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="group != null">-->
+    <!--GROUP_ = #{group,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="status != null">-->
+    <!--STATUS_ = #{status,jdbcType=TINYINT},-->
+    <!--</if>-->
+    <!--<if test="cron != null">-->
+    <!--CRON_ = #{cron,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="description != null">-->
+    <!--DESCRIPTION_ = #{description,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="isConcurrent != null">-->
+    <!--IS_CONCURRENT_ = #{isConcurrent,jdbcType=TINYINT},-->
+    <!--</if>-->
+    <!--<if test="beanClass != null">-->
+    <!--BEAN_CLASS_ = #{beanClass,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="beanName != null">-->
+    <!--BEAN_NAME_ = #{beanName,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="methodName != null">-->
+    <!--METHOD_NAME_ = #{methodName,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="createTime != null">-->
+    <!--CREATE_TIME_ = #{createTime,jdbcType=TIMESTAMP},-->
+    <!--</if>-->
+    <!--<if test="updateTime != null">-->
+    <!--UPDATE_TIME_ = #{updateTime,jdbcType=TIMESTAMP},-->
+    <!--</if>-->
+    <!--<if test="createUser != null">-->
+    <!--CREATE_USER_ = #{createUser,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="modifyUser != null">-->
+    <!--MODIFY_USER_ = #{modifyUser,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="version != null">-->
+    <!--VERSION_ = #{version,jdbcType=BIGINT},-->
+    <!--</if>-->
+    <!--</set>-->
+    <!--where ID_ = #{id,jdbcType=BIGINT}-->
+    <!--</update>-->
+
+
+    <update id="update">
+        UPDATE SCHEDULE_JOB SET
+        <if test="name!=null">
+            NAME_ = #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="group!=null">
+            GROUP_ = #{group,jdbcType=VARCHAR},
+        </if>
+        <if test="status!=null">
+            STATUS_ = #{status,jdbcType=TINYINT},
+        </if>
+        <if test="cron!=null">
+            CRON_ = #{cron,jdbcType=VARCHAR},
+        </if>
+        <if test="description!=null">
+            DESCRIPTION_ = #{description,jdbcType=VARCHAR},
+        </if>
+        <if test="isConcurrent!=null">
+            IS_CONCURRENT_ = #{isConcurrent,jdbcType=TINYINT},
+        </if>
+        <if test="beanName!=null">
+            BEAN_NAME_ = #{beanName,jdbcType=VARCHAR},
+        </if>
+        <if test="methodName!=null">
+            METHOD_NAME_ = #{methodName,jdbcType=VARCHAR},
+        </if>
+        <if test="createTime!=null">
+            CREATE_TIME_ = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateTime!=null">
+            UPDATE_TIME_ = #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createUser!=null">
+            CREATE_USER_ = #{createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="modifyUser!=null">
+            MODIFY_USER_ = #{modifyUser,jdbcType=VARCHAR},
+        </if>
+        <if test="version!=null">
+            VERSION_ = #{version,jdbcType=BIGINT}
+        </if>
+        UPDATE_TIME_ = sysdate
+        WHERE
+        ID_ = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <sql id="listScheduleJobWhere">
+        <!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+        <where>
+            <if test="name!=null and name!=''">
+                AND NAME_ = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="group!=null and group!=''">
+                AND GROUP_ = #{group,jdbcType=VARCHAR},
+            </if>
+            <if test="status!=null and status!=''">
+                AND STATUS_ = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="cron!=null and cron!=''">
+                AND CRON_ = #{cron,jdbcType=VARCHAR},
+            </if>
+            <if test="description!=null and description!=''">
+                AND DESCRIPTION_ = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="isConcurrent!=null and isConcurrent!=''">
+                AND IS_CONCURRENT_ = #{isConcurrent,jdbcType=TINYINT},
+            </if>
+            <if test="beanName!=null and beanName!=''">
+                AND BEAN_NAME_ = #{beanName,jdbcType=VARCHAR},
+            </if>
+            <if test="methodName!=null and methodName!=''">
+                AND METHOD_NAME_ = #{methodName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                AND CREATE_TIME_ = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                AND UPDATE_TIME_ = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser!=null and createUser!=''">
+                AND CREATE_USER_ = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyUser!=null and modifyUser!=''">
+                AND MODIFY_USER_ = #{modifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="version!=null and version!=''">
+                AND VERSION_ = #{version,jdbcType=BIGINT}
+            </if>
+        </where>
+    </sql>
+
+    <select id="listScheduleJob" resultMap="BaseResultMap">
+        SELECT
+        <include refid="ScheduleJobColumns"/>
+        FROM SCHEDULE_JOB
+        <include refid="listScheduleJobWhere"/>
+        order BY ID_ desc
+    </select>
+</mapper>
