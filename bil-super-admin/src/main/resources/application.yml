@@ -1,0 +1,14 @@
+#服务器配置
+server:
+  port: 8080
+
+##freemarker配置
+spring:
+  freemarker:
+    charset: UTF-8
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+    cache: false
+
+#  mvc:
+#    static-path-pattern: classpath:/static/**   #设定静态文件路径，js,css等

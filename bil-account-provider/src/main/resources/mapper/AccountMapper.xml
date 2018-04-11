@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bil.account.dao.AccountMapper">
+    <resultMap id="BaseResultMap" type="com.bil.account.model.Account">
+        <constructor>
+            <idArg column="ID" jdbcType="DECIMAL" javaType="java.lang.Long"/>
+            <arg column="ACCOUNT_NO" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="ACCOUNT_NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="ACCOUNT_TYPE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="BALANCE" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="CURRENCY" jdbcType="CHAR" javaType="java.lang.String"/>
+            <arg column="OVERDRAFT" jdbcType="CHAR" javaType="java.lang.String"/>
+            <arg column="BALANCE_OF_DIRECTION" jdbcType="CHAR" javaType="java.lang.String"/>
+            <arg column="ACCOUNTING_SUBJECTS" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="ACCOUNT_LEVEL" jdbcType="CHAR" javaType="java.lang.String"/>
+            <arg column="STATUS" jdbcType="CHAR" javaType="java.lang.String"/>
+            <arg column="OBJECT_NO" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="UPDATE_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="CREATE_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="VERSION" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, ACCOUNT_NO, ACCOUNT_NAME, ACCOUNT_TYPE, BALANCE, CURRENCY, OVERDRAFT, BALANCE_OF_DIRECTION, 
+    ACCOUNTING_SUBJECTS, ACCOUNT_LEVEL, STATUS, OBJECT_NO, UPDATE_TIME, CREATE_TIME, 
+    VERSION
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from AC_ACCOUNT_${tableSuffix}
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" >
+    delete from AC_ACCOUNT_${tableSuffix}
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" keyProperty="id" parameterType="com.bil.account.model.Account" useGeneratedKeys="true">
+    insert into AC_ACCOUNT_${tableSuffix} (ID, ACCOUNT_NO, ACCOUNT_NAME,
+      ACCOUNT_TYPE, BALANCE, CURRENCY, 
+      OVERDRAFT, BALANCE_OF_DIRECTION, ACCOUNTING_SUBJECTS, 
+      ACCOUNT_LEVEL, STATUS, OBJECT_NO, 
+      UPDATE_TIME, CREATE_TIME, VERSION
+      )
+    values (#{id,jdbcType=DECIMAL}, #{accountNo,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, 
+      #{accountType,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, #{currency,jdbcType=CHAR}, 
+      #{overdraft,jdbcType=CHAR}, #{balanceOfDirection,jdbcType=CHAR}, #{accountingSubjects,jdbcType=VARCHAR}, 
+      #{accountLevel,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{objectNo,jdbcType=VARCHAR}, 
+      now(), now(), #{version,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.bil.account.model.Account">
+        insert into AC_ACCOUNT_${tableSuffix}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="accountNo != null">
+                ACCOUNT_NO,
+            </if>
+            <if test="accountName != null">
+                ACCOUNT_NAME,
+            </if>
+            <if test="accountType != null">
+                ACCOUNT_TYPE,
+            </if>
+            <if test="balance != null">
+                BALANCE,
+            </if>
+            <if test="currency != null">
+                CURRENCY,
+            </if>
+            <if test="overdraft != null">
+                OVERDRAFT,
+            </if>
+            <if test="balanceOfDirection != null">
+                BALANCE_OF_DIRECTION,
+            </if>
+            <if test="accountingSubjects != null">
+                ACCOUNTING_SUBJECTS,
+            </if>
+            <if test="accountLevel != null">
+                ACCOUNT_LEVEL,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="objectNo != null">
+                OBJECT_NO,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="version != null">
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="accountNo != null">
+                #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="accountName != null">
+                #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="accountType != null">
+                #{accountType,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="currency != null">
+                #{currency,jdbcType=CHAR},
+            </if>
+            <if test="overdraft != null">
+                #{overdraft,jdbcType=CHAR},
+            </if>
+            <if test="balanceOfDirection != null">
+                #{balanceOfDirection,jdbcType=CHAR},
+            </if>
+            <if test="accountingSubjects != null">
+                #{accountingSubjects,jdbcType=VARCHAR},
+            </if>
+            <if test="accountLevel != null">
+                #{accountLevel,jdbcType=CHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="objectNo != null">
+                #{objectNo,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bil.account.model.Account">
+        update AC_ACCOUNT_${tableSuffix}
+        <set>
+            <if test="accountNo != null">
+                ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="accountName != null">
+                ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="accountType != null">
+                ACCOUNT_TYPE = #{accountType,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                BALANCE = #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="currency != null">
+                CURRENCY = #{currency,jdbcType=CHAR},
+            </if>
+            <if test="overdraft != null">
+                OVERDRAFT = #{overdraft,jdbcType=CHAR},
+            </if>
+            <if test="balanceOfDirection != null">
+                BALANCE_OF_DIRECTION = #{balanceOfDirection,jdbcType=CHAR},
+            </if>
+            <if test="accountingSubjects != null">
+                ACCOUNTING_SUBJECTS = #{accountingSubjects,jdbcType=VARCHAR},
+            </if>
+            <if test="accountLevel != null">
+                ACCOUNT_LEVEL = #{accountLevel,jdbcType=CHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=CHAR},
+            </if>
+            <if test="objectNo != null">
+                OBJECT_NO = #{objectNo,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null">
+                VERSION = #{version,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bil.account.model.Account">
+    update AC_ACCOUNT_${tableSuffix}
+    set ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+      ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+      ACCOUNT_TYPE = #{accountType,jdbcType=VARCHAR},
+      BALANCE = #{balance,jdbcType=DECIMAL},
+      CURRENCY = #{currency,jdbcType=CHAR},
+      OVERDRAFT = #{overdraft,jdbcType=CHAR},
+      BALANCE_OF_DIRECTION = #{balanceOfDirection,jdbcType=CHAR},
+      ACCOUNTING_SUBJECTS = #{accountingSubjects,jdbcType=VARCHAR},
+      ACCOUNT_LEVEL = #{accountLevel,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      OBJECT_NO = #{objectNo,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+
+    <update id="copyTableStructure">
+    CREATE  TABLE IF NOT EXISTS ${newTableName} (LIKE ${originalTableName});
+  </update>
+
+
+    <select id="queryList" resultMap="BaseResultMap" resultType="List">
+        select
+        <include refid="Base_Column_List"/>
+        from AC_ACCOUNT_${tableSuffix}
+        <include refid="listWhere"/>
+    </select>
+
+    <sql id="listWhere">
+        <where>
+            <if test="accountNo != null">
+                AND ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR}
+            </if>
+            <if test="accountName != null">
+                AND ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR}
+            </if>
+            <if test="accountType != null">
+                AND ACCOUNT_TYPE = #{accountType,jdbcType=VARCHAR}
+            </if>
+            <if test="balance != null">
+                AND BALANCE = #{balance,jdbcType=DECIMAL}
+            </if>
+            <if test="currency != null">
+                AND CURRENCY = #{currency,jdbcType=CHAR}
+            </if>
+            <if test="overdraft != null">
+                AND OVERDRAFT = #{overdraft,jdbcType=CHAR}
+            </if>
+            <if test="balanceOfDirection != null">
+                AND BALANCE_OF_DIRECTION = #{balanceOfDirection,jdbcType=CHAR}
+            </if>
+            <if test="accountingSubjects != null">
+                AND ACCOUNTING_SUBJECTS = #{accountingSubjects,jdbcType=VARCHAR}
+            </if>
+            <if test="accountLevel != null">
+                AND ACCOUNT_LEVEL = #{accountLevel,jdbcType=CHAR}
+            </if>
+            <if test="status != null">
+                AND STATUS = #{status,jdbcType=CHAR}
+            </if>
+            <if test="objectNo != null">
+                AND OBJECT_NO = #{objectNo,jdbcType=VARCHAR}
+            </if>
+            <if test="updateTime != null">
+                AND UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createTime != null">
+                AND CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="version != null">
+                AND VERSION = #{version,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </sql>
+
+</mapper>

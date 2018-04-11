@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bil.base.storage.dao.HashStorageNodeMapper">
+    <resultMap id="BaseResultMap" type="com.bil.base.storage.model.HashStorageNode">
+        <constructor>
+            <idArg column="ID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="HASH_CODE" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="TABLE_PREFIX" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="TABLE_SUFFIX" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="NODE_STATUS" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="DATA_STATUS" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="UPDATE_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="CREATE_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="VERSION" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, HASH_CODE, TABLE_PREFIX, TABLE_SUFFIX, NODE_STATUS, DATA_STATUS, UPDATE_TIME, 
+    CREATE_TIME, VERSION
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from HASH_STORAGE_NODE
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from HASH_STORAGE_NODE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="HashStorageNode">
+    insert into HASH_STORAGE_NODE (ID, HASH_CODE, TABLE_PREFIX, 
+      TABLE_SUFFIX, NODE_STATUS, DATA_STATUS, 
+      UPDATE_TIME, CREATE_TIME, VERSION
+      )
+    values (#{id,jdbcType=INTEGER}, #{hashCode,jdbcType=INTEGER}, #{tablePrefix,jdbcType=VARCHAR}, 
+      #{tableSuffix,jdbcType=VARCHAR}, #{nodeStatus,jdbcType=VARCHAR}, #{dataStatus,jdbcType=VARCHAR}, 
+      now(), now(), #{version,jdbcType=VARCHAR}
+      )
+  </insert>
+
+    <insert id="insertSelective" parameterType="HashStorageNode">
+        insert into HASH_STORAGE_NODE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="hashCode != null">
+                HASH_CODE,
+            </if>
+            <if test="tablePrefix != null">
+                TABLE_PREFIX,
+            </if>
+            <if test="tableSuffix != null">
+                TABLE_SUFFIX,
+            </if>
+            <if test="nodeStatus != null">
+                NODE_STATUS,
+            </if>
+            <if test="dataStatus != null">
+                DATA_STATUS,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="version != null">
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="hashCode != null">
+                #{hashCode,jdbcType=INTEGER},
+            </if>
+            <if test="tablePrefix != null">
+                #{tablePrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="tableSuffix != null">
+                #{tableSuffix,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeStatus != null">
+                #{nodeStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="dataStatus != null">
+                #{dataStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="HashStorageNode">
+        update HASH_STORAGE_NODE
+        <set>
+            <if test="hashCode != null">
+                HASH_CODE = #{hashCode,jdbcType=INTEGER},
+            </if>
+            <if test="tablePrefix != null">
+                TABLE_PREFIX = #{tablePrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="tableSuffix != null">
+                TABLE_SUFFIX = #{tableSuffix,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeStatus != null">
+                NODE_STATUS = #{nodeStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="dataStatus != null">
+                DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+            </if>
+            <!--<if test="createTime != null">-->
+            <!--CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <if test="version != null">
+                VERSION = #{version,jdbcType=VARCHAR},
+            </if>
+            UPDATE_TIME = now()
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="HashStorageNode">
+    update HASH_STORAGE_NODE
+    set HASH_CODE = #{hashCode,jdbcType=INTEGER},
+      TABLE_PREFIX = #{tablePrefix,jdbcType=VARCHAR},
+      TABLE_SUFFIX = #{tableSuffix,jdbcType=VARCHAR},
+      NODE_STATUS = #{nodeStatus,jdbcType=VARCHAR},
+      DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+      UPDATE_TIME = now(),
+--       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="queryList" resultMap="BaseResultMap" parameterType="List">
+        select
+        <include refid="Base_Column_List"/>
+        from HASH_STORAGE_NODE
+        <include refid="listWhere"/>
+    </select>
+
+    <sql id="listWhere">
+        <where>
+            <if test="hashCode != null and hashCode!=''">
+                AND HASH_CODE = #{hashCode,jdbcType=INTEGER}
+            </if>
+            <if test="tablePrefix != null and tablePrefix!=''">
+                AND TABLE_PREFIX = #{tablePrefix,jdbcType=VARCHAR}
+            </if>
+            <if test="tableSuffix != null and tableSuffix!=''">
+                AND TABLE_SUFFIX = #{tableSuffix,jdbcType=VARCHAR}
+            </if>
+            <if test="nodeStatus != null and nodeStatus!=''">
+                AND NODE_STATUS = #{nodeStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="dataStatus != null and dataStatus!=''">
+                AND DATA_STATUS = #{dataStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="updateTime != null and updateTime!=''">
+                AND UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createTime != null and createTime!=''">
+                AND CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="version != null and version!=''">
+                AND VERSION = #{version,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <dubbo:protocol name="dubbo" dispatcher="all" threadpool="fixed" payload="220971520" threads="600"/>
+
+    <dubbo:reference id="splitTableStorage" interface="com.bil.base.storage.service.SplitTableStorage"
+                     timeout="6000" check="true" retries="0"/>
+
+</beans>

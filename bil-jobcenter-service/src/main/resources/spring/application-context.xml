@@ -34,7 +34,7 @@
 
     <!--配置mapper扫描器-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.bob.jobcenter.dao"/>
+        <property name="basePackage" value="com.bob.jobcenter.com.bil.account.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
@@ -43,7 +43,7 @@
 
     <!--开启扫描注解Bean-->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-    <context:component-scan base-package="com.bob.jobcenter.dao"/>
+    <context:component-scan base-package="com.bob.jobcenter.com.bil.account.dao"/>
     <context:component-scan base-package="com.bob.jobcenter.service"/>
     <context:component-scan base-package="com.bob.jobcenter.jobs"/>
 

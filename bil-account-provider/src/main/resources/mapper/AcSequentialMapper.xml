@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bil.account.dao.AcSequentialMapper" >
+  <resultMap id="BaseResultMap" type="com.bil.account.model.AcSequential" >
+    <constructor >
+      <idArg column="ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="TRANSACTION_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ACCOUNT_NO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BALANCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PRE_BALANCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREDIT_AMOUNT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DEBIT_AMOUNT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPPOSITE_ACC_NO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREATED_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="VERSION" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TRANSACTION_ID, ACCOUNT_NO, BALANCE, PRE_BALANCE, CREDIT_AMOUNT, DEBIT_AMOUNT, 
+    OPPOSITE_ACC_NO, CREATED_TIME, VERSION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from AC_SEQUENTIAL
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from AC_SEQUENTIAL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.bil.account.model.AcSequential" >
+    insert into AC_SEQUENTIAL (ID, TRANSACTION_ID, ACCOUNT_NO, 
+      BALANCE, PRE_BALANCE, CREDIT_AMOUNT, 
+      DEBIT_AMOUNT, OPPOSITE_ACC_NO, CREATED_TIME, 
+      VERSION)
+    values (#{id,jdbcType=DECIMAL}, #{transactionId,jdbcType=VARCHAR}, #{accountNo,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=VARCHAR}, #{preBalance,jdbcType=VARCHAR}, #{creditAmount,jdbcType=VARCHAR}, 
+      #{debitAmount,jdbcType=VARCHAR}, #{oppositeAccNo,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bil.account.model.AcSequential" >
+    insert into AC_SEQUENTIAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="transactionId != null" >
+        TRANSACTION_ID,
+      </if>
+      <if test="accountNo != null" >
+        ACCOUNT_NO,
+      </if>
+      <if test="balance != null" >
+        BALANCE,
+      </if>
+      <if test="preBalance != null" >
+        PRE_BALANCE,
+      </if>
+      <if test="creditAmount != null" >
+        CREDIT_AMOUNT,
+      </if>
+      <if test="debitAmount != null" >
+        DEBIT_AMOUNT,
+      </if>
+      <if test="oppositeAccNo != null" >
+        OPPOSITE_ACC_NO,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="transactionId != null" >
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNo != null" >
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=VARCHAR},
+      </if>
+      <if test="preBalance != null" >
+        #{preBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="creditAmount != null" >
+        #{creditAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="debitAmount != null" >
+        #{debitAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="oppositeAccNo != null" >
+        #{oppositeAccNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bil.account.model.AcSequential" >
+    update AC_SEQUENTIAL
+    <set >
+      <if test="transactionId != null" >
+        TRANSACTION_ID = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNo != null" >
+        ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        BALANCE = #{balance,jdbcType=VARCHAR},
+      </if>
+      <if test="preBalance != null" >
+        PRE_BALANCE = #{preBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="creditAmount != null" >
+        CREDIT_AMOUNT = #{creditAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="debitAmount != null" >
+        DEBIT_AMOUNT = #{debitAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="oppositeAccNo != null" >
+        OPPOSITE_ACC_NO = #{oppositeAccNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bil.account.model.AcSequential" >
+    update AC_SEQUENTIAL
+    set TRANSACTION_ID = #{transactionId,jdbcType=VARCHAR},
+      ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+      BALANCE = #{balance,jdbcType=VARCHAR},
+      PRE_BALANCE = #{preBalance,jdbcType=VARCHAR},
+      CREDIT_AMOUNT = #{creditAmount,jdbcType=VARCHAR},
+      DEBIT_AMOUNT = #{debitAmount,jdbcType=VARCHAR},
+      OPPOSITE_ACC_NO = #{oppositeAccNo,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

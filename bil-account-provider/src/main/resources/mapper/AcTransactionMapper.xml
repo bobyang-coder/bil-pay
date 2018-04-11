@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bil.account.dao.AcTransactionMapper" >
+  <resultMap id="BaseResultMap" type="com.bil.account.model.AcTransaction" >
+    <constructor >
+      <idArg column="ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="COMMAND_NO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMMAND_TYPE" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="SORT_NUM" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TRANSACTION_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FROM_ACCOUNT_NO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TO_ACCOUNT_NO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AMOUNT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="CURRENCY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TRANSFER_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PRODUCT_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BUSINESS_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TRADE_NO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TRADE_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="OUT_TRADE_NO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RESULT_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOOKKEEPING CODER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NOTE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREATE_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="VERSION" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, COMMAND_NO, COMMAND_TYPE, SORT_NUM, TRANSACTION_CODE, FROM_ACCOUNT_NO, TO_ACCOUNT_NO, 
+    AMOUNT, CURRENCY, TRANSFER_TYPE, PRODUCT_CODE, BUSINESS_CODE, TRADE_NO, TRADE_TIME, 
+    OUT_TRADE_NO, RESULT_CODE, "BOOKKEEPING CODER", NOTE, CREATE_TIME, VERSION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from AC_TRANSACTION
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from AC_TRANSACTION
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.bil.account.model.AcTransaction" >
+    insert into AC_TRANSACTION (ID, COMMAND_NO, COMMAND_TYPE, 
+      SORT_NUM, TRANSACTION_CODE, FROM_ACCOUNT_NO, 
+      TO_ACCOUNT_NO, AMOUNT, CURRENCY, 
+      TRANSFER_TYPE, PRODUCT_CODE, BUSINESS_CODE, 
+      TRADE_NO, TRADE_TIME, OUT_TRADE_NO, 
+      RESULT_CODE, "BOOKKEEPING CODER", NOTE, 
+      CREATE_TIME, VERSION)
+    values (#{id,jdbcType=DECIMAL}, #{commandNo,jdbcType=VARCHAR}, #{commandType,jdbcType=CHAR}, 
+      #{sortNum,jdbcType=INTEGER}, #{transactionCode,jdbcType=VARCHAR}, #{fromAccountNo,jdbcType=VARCHAR}, 
+      #{toAccountNo,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=VARCHAR}, 
+      #{transferType,jdbcType=VARCHAR}, #{productCode,jdbcType=VARCHAR}, #{businessCode,jdbcType=VARCHAR}, 
+      #{tradeNo,jdbcType=VARCHAR}, #{tradeTime,jdbcType=TIMESTAMP}, #{outTradeNo,jdbcType=VARCHAR}, 
+      #{resultCode,jdbcType=VARCHAR}, #{bookkeepingCoder,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{version,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bil.account.model.AcTransaction" >
+    insert into AC_TRANSACTION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="commandNo != null" >
+        COMMAND_NO,
+      </if>
+      <if test="commandType != null" >
+        COMMAND_TYPE,
+      </if>
+      <if test="sortNum != null" >
+        SORT_NUM,
+      </if>
+      <if test="transactionCode != null" >
+        TRANSACTION_CODE,
+      </if>
+      <if test="fromAccountNo != null" >
+        FROM_ACCOUNT_NO,
+      </if>
+      <if test="toAccountNo != null" >
+        TO_ACCOUNT_NO,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="currency != null" >
+        CURRENCY,
+      </if>
+      <if test="transferType != null" >
+        TRANSFER_TYPE,
+      </if>
+      <if test="productCode != null" >
+        PRODUCT_CODE,
+      </if>
+      <if test="businessCode != null" >
+        BUSINESS_CODE,
+      </if>
+      <if test="tradeNo != null" >
+        TRADE_NO,
+      </if>
+      <if test="tradeTime != null" >
+        TRADE_TIME,
+      </if>
+      <if test="outTradeNo != null" >
+        OUT_TRADE_NO,
+      </if>
+      <if test="resultCode != null" >
+        RESULT_CODE,
+      </if>
+      <if test="bookkeepingCoder != null" >
+        "BOOKKEEPING CODER",
+      </if>
+      <if test="note != null" >
+        NOTE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="commandNo != null" >
+        #{commandNo,jdbcType=VARCHAR},
+      </if>
+      <if test="commandType != null" >
+        #{commandType,jdbcType=CHAR},
+      </if>
+      <if test="sortNum != null" >
+        #{sortNum,jdbcType=INTEGER},
+      </if>
+      <if test="transactionCode != null" >
+        #{transactionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAccountNo != null" >
+        #{fromAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="toAccountNo != null" >
+        #{toAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null" >
+        #{transferType,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCode != null" >
+        #{businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null" >
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTime != null" >
+        #{tradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTradeNo != null" >
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="resultCode != null" >
+        #{resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bookkeepingCoder != null" >
+        #{bookkeepingCoder,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bil.account.model.AcTransaction" >
+    update AC_TRANSACTION
+    <set >
+      <if test="commandNo != null" >
+        COMMAND_NO = #{commandNo,jdbcType=VARCHAR},
+      </if>
+      <if test="commandType != null" >
+        COMMAND_TYPE = #{commandType,jdbcType=CHAR},
+      </if>
+      <if test="sortNum != null" >
+        SORT_NUM = #{sortNum,jdbcType=INTEGER},
+      </if>
+      <if test="transactionCode != null" >
+        TRANSACTION_CODE = #{transactionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAccountNo != null" >
+        FROM_ACCOUNT_NO = #{fromAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="toAccountNo != null" >
+        TO_ACCOUNT_NO = #{toAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="currency != null" >
+        CURRENCY = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null" >
+        TRANSFER_TYPE = #{transferType,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCode != null" >
+        BUSINESS_CODE = #{businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null" >
+        TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTime != null" >
+        TRADE_TIME = #{tradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTradeNo != null" >
+        OUT_TRADE_NO = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="resultCode != null" >
+        RESULT_CODE = #{resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bookkeepingCoder != null" >
+        "BOOKKEEPING CODER" = #{bookkeepingCoder,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        NOTE = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bil.account.model.AcTransaction" >
+    update AC_TRANSACTION
+    set COMMAND_NO = #{commandNo,jdbcType=VARCHAR},
+      COMMAND_TYPE = #{commandType,jdbcType=CHAR},
+      SORT_NUM = #{sortNum,jdbcType=INTEGER},
+      TRANSACTION_CODE = #{transactionCode,jdbcType=VARCHAR},
+      FROM_ACCOUNT_NO = #{fromAccountNo,jdbcType=VARCHAR},
+      TO_ACCOUNT_NO = #{toAccountNo,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      CURRENCY = #{currency,jdbcType=VARCHAR},
+      TRANSFER_TYPE = #{transferType,jdbcType=VARCHAR},
+      PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      BUSINESS_CODE = #{businessCode,jdbcType=VARCHAR},
+      TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      TRADE_TIME = #{tradeTime,jdbcType=TIMESTAMP},
+      OUT_TRADE_NO = #{outTradeNo,jdbcType=VARCHAR},
+      RESULT_CODE = #{resultCode,jdbcType=VARCHAR},
+      "BOOKKEEPING CODER" = #{bookkeepingCoder,jdbcType=VARCHAR},
+      NOTE = #{note,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

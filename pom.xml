@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.bob</groupId>
+    <artifactId>bob-bil</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <description>
+        bil计划
+        启动时间:
+    </description>
+
+    <developers>
+        <developer>
+            <name>bob</name>
+            <email>bobyang_coder@163.com</email>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>bil-parent</module>
+        <module>bil-mq-kafka</module>
+        <module>bil-workflow</module>
+        <module>bil-jobcenter-service</module>
+        <module>bil-jobcenter-api</module>
+        <module>bil-biz</module>
+        <module>bil-spring-extend</module>
+        <!--<module>bil-test-web</module>-->
+        <!--<module>bil-security</module>-->
+        <module>bil-route</module>
+        <module>bil-account-provider</module>
+        <module>bil-account-api</module>
+        <module>bil-base-api</module>
+        <module>bil-base-provider</module>
+        <module>bil-parent4api</module>
+        <module>bil-parent4provider</module>
+    </modules>
+
+</project>
