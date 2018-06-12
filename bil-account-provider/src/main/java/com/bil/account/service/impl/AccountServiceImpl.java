@@ -15,13 +15,13 @@ import com.google.common.collect.Maps;
 import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StopWatch;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,9 +37,9 @@ import java.util.List;
 @Slf4j
 public class AccountServiceImpl implements AccountService {
 
-    @Autowired
+    @Resource
     private AccountMapper accountMapper;
-    @Autowired
+    @Resource
     private SplitTableStorage splitTableStorage;
 
     @Transactional(rollbackFor = Exception.class)

@@ -3,13 +3,17 @@ package com.bil.account.service;
 import com.bil.account.model.Account;
 
 /**
- * Created by bob on 2018/4/6.
+ * 账户服务
  *
  * @author bob   <bobyang_coder@163.com>
  * @version v1.0
  * @since 2018/4/6
  */
 public interface AccountService {
+
+    //TODO 1、开户
+    //TODO 2、查询
+    //TODO 3、转账
 
 
     /**
