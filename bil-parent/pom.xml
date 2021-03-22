@@ -60,7 +60,7 @@
         <!--搜索-->
         <solrj.version>4.10.3</solrj.version>
         <!--注册中心-->
-        <zookeeper.version>3.4.7</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
         <zkclient.version>0.1</zkclient.version>
         <!--模板引擎-->
         <freemarker.version>2.3.23</freemarker.version>
