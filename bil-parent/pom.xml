@@ -65,7 +65,7 @@
         <!--模板引擎-->
         <freemarker.version>2.3.23</freemarker.version>
         <!--任务调度-->
-        <quartz.version>2.2.2</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
         <!--rpc-->
         <netty.version>4.0.26.Final</netty.version>
         <!--序列化工具-->
